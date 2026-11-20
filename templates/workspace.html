@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}New analysis{% endblock %}
+{% block pagetitle %}New analysis{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/eclipse.min.css">
+{% endblock %}
+{% block content %}
+<div class="ws">
+  <section class="panel" id="dropzone">
+    <div class="toolbar">
+      <input id="projName" value="find_duplicates.py" aria-label="File name" class="name">
+      <span class="grow"></span>
+      <button class="btn btn-ghost btn-sm" id="btnUpload"><svg class="i"><use href="#i-upload"/></svg>Upload</button>
+      <button class="btn btn-ghost btn-sm" id="btnCopy"><svg class="i"><use href="#i-copy"/></svg>Copy</button>
+      <button class="btn btn-ghost btn-sm" id="btnReset"><svg class="i"><use href="#i-reset"/></svg>Reset sample</button>
+      <button class="btn btn-ghost btn-sm" id="btnClear"><svg class="i"><use href="#i-trash"/></svg>Clear</button>
+      <button class="icon-btn" id="btnTheme" aria-label="Toggle editor theme"><svg class="i"><use href="#i-sun"/></svg></button>
+      <input type="file" id="file" accept=".py,.txt" hidden>
+    </div>
+    <textarea id="code"></textarea>
+    <p class="muted small pad">Drop a .py file onto the editor. Code is never executed in this prototype.</p>
+  </section>
+  <aside class="panel side-form">
+    <label>Language
+      <select id="lang"><option>Python</option><option disabled>JavaScript (soon)</option><option disabled>Java (soon)</option><option disabled>C++ (soon)</option><option disabled>Go (soon)</option></select></label>
+    <label>Input size N<input type="number" id="n" value="1000" min="10" max="1000000"></label>
+    <div class="chips" id="chips"><button type="button" data-n="100">100</button><button type="button" data-n="1000">1,000</button><button type="button" data-n="10000">10,000</button><button type="button" data-n="100000">100,000</button></div>
+    <p class="muted small">N is the number of items or loop iterations the estimates are scaled to.</p>
+    <button class="btn btn-primary btn-lg block" id="btnAnalyze">Analyze Code</button>
+  </aside>
+</div>
+<div id="overlay" hidden><div class="ov-card"><h2>Analyzing your code</h2><p class="muted small">Simulated steps. Nothing is executed.</p>
+  <ul id="ovSteps"></ul><div class="bar"><i id="ovBar"></i></div></div></div>
+{% endblock %}
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<script src="{{ url_for('static', filename='js/editor.js') }}"></script>
+{% endblock %}

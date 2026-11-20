@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Analysis history{% endblock %}
+{% block pagetitle %}Analysis history{% endblock %}
+{% block head %}<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">{% endblock %}
+{% block content %}
+<section id="summary" class="stats"><div><b id="s-count"></b><span>analyses</span></div><div><b id="s-time"></b><span>average runtime</span></div><div><b id="s-co2"></b><span>total CO₂e (demo)</span></div>
+  <button class="btn btn-ghost" id="btnCsv"><svg class="i"><use href="#i-download"/></svg>Export CSV</button></section>
+<div class="filters">
+  <label class="search"><svg class="i"><use href="#i-search"/></svg><input id="q" placeholder="Search by file name" aria-label="Search"></label>
+  <select id="fLang" aria-label="Language"><option value="">All languages</option></select>
+  <select id="fCx" aria-label="Complexity"><option value="">All complexities</option></select>
+</div>
+<div class="panel flush"><div class="scroll"><table class="tbl big" id="hist"><thead><tr><th>File</th><th>Language</th><th>Complexity</th><th>Execution time</th><th>Date</th><th></th></tr></thead><tbody></tbody></table></div>
+  <div class="empty" id="empty" hidden><h3>No analyses match</h3><p class="muted">Clear the filters, or analyze a new program.</p><a class="btn btn-primary" href="{{ url_for('analyze') }}">New analysis</a></div></div>
+{% endblock %}

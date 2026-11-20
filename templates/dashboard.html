@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Analysis dashboard{% endblock %}
+{% block pagetitle %}Analysis dashboard{% endblock %}
+{% block head %}<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">{% endblock %}
+{% block content %}
+<p class="muted" id="meta"></p>
+<section class="metrics">
+  <article class="metric c-blue"><header><svg class="i"><use href="#i-clock"/></svg>Time complexity</header><div class="val" id="m-cx"></div><p id="m-cx-n"></p><div class="meter"><i id="meter-cx"></i></div></article>
+  <article class="metric c-amber"><header><svg class="i"><use href="#i-code"/></svg>Execution time</header><div class="val"><span id="m-t"></span><small id="m-t-u"></small></div><p>Estimated runtime at your chosen N.</p><div class="meter"><i id="meter-t"></i></div></article>
+  <article class="metric c-blue"><header><svg class="i"><use href="#i-bolt"/></svg>Energy consumption</header><div class="val"><span id="m-e"></span><small>Wh</small></div><p>Estimated energy for one run.</p><div class="meter"><i id="meter-e"></i></div></article>
+  <article class="metric c-green"><header><svg class="i"><use href="#i-leaf"/></svg>Carbon emissions</header><div class="val"><span id="m-c"></span><small id="m-c-u"></small></div><p>Energy converted with a fixed demo grid factor.</p><div class="meter"><i id="meter-c"></i></div></article>
+</section>
+<p class="muted small">Bars show efficiency relative to the optimized version. A full bar means nothing left to gain.</p>
+
+<section class="charts">
+  <div class="panel"><h3>Execution time vs input size</h3><div class="cv"><canvas id="chTime"></canvas></div></div>
+  <div class="panel"><h3>Energy consumption vs input size</h3><div class="cv"><canvas id="chEnergy"></canvas></div></div>
+  <div class="panel"><h3>Carbon emissions vs input size</h3><div class="cv"><canvas id="chCo2"></canvas></div></div>
+  <div class="panel"><h3>Scalability (operations, log scale)</h3><div class="cv"><canvas id="chScale"></canvas></div></div>
+</section>
+
+<section class="tech">
+  <div class="panel"><h3>Detected loops</h3><table class="tbl" id="loops"><thead><tr><th>Line</th><th>Loop</th><th>Depth</th><th>Cost</th></tr></thead><tbody></tbody></table>
+    <h3>Complexity explanation</h3><p id="explain"></p></div>
+  <div class="panel"><h3>Potentially inefficient operations</h3><ul class="flags" id="ineff"></ul>
+    <h3>Bottlenecks</h3><ul class="flags" id="bottle"></ul>
+    <h3>Recommendations</h3><ul class="flags ok" id="recs"></ul></div>
+</section>
+<div class="cta"><div><b>Ready to cut the cost?</b><span class="muted">See an optimized version and the difference.</span></div>
+  <a class="btn btn-primary btn-lg" href="{{ url_for('comparison') }}">OPTIMIZE MY CODE</a></div>
+{% endblock %}
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Optimization and comparison{% endblock %}
+{% block pagetitle %}Original vs optimized{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+{% block content %}
+<section class="cmp-code">
+  <div class="panel"><header class="ph"><h3>Original code</h3><span class="pill bad" id="o-sum"></span></header><textarea id="origCode"></textarea></div>
+  <div class="panel"><header class="ph"><h3>Optimized code</h3><span class="pill good" id="p-sum"></span></header><textarea id="optCode"></textarea></div>
+</section>
+<section class="panel"><h3>What changed</h3><ul class="flags ok" id="notes"></ul>
+  <p class="muted small">Prototype note: the optimized code is a fixed sample, not generated from your input.</p></section>
+<section class="metrics" id="deltas"></section>
+<section class="panel"><h3>Optimized as a percentage of original (lower is better)</h3><div class="cv short"><canvas id="chCmp"></canvas></div></section>
+<div class="cta wrapbtn">
+  <a class="btn btn-ghost" href="{{ url_for('dashboard') }}"><svg class="i"><use href="#i-back"/></svg>Back to dashboard</a>
+  <button class="btn btn-ghost" id="btnCopyOpt"><svg class="i"><use href="#i-copy"/></svg>Copy code</button>
+  <button class="btn btn-primary" id="btnDl"><svg class="i"><use href="#i-download"/></svg>Download optimized code</button>
+  <a class="btn btn-ghost" href="{{ url_for('analyze') }}">Analyze another program</a>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<script src="{{ url_for('static', filename='js/comparison.js') }}"></script>
+{% endblock %}

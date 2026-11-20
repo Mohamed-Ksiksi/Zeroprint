@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Code performance and carbon, measured{% endblock %}
+{% block bodyclass %}land{% endblock %}
+{% block shell %}
+<header class="nav"><a class="brand" href="{{ url_for('index') }}"><svg class="i"><use href="#i-leaf"/></svg>EcoCode</a>
+  <nav><a href="#how">How it works</a><a href="#features">Capabilities</a><a href="{{ url_for('dashboard') }}">Sample dashboard</a><a href="{{ url_for('reports') }}">History</a></nav>
+  <a class="btn btn-primary btn-sm" href="{{ url_for('analyze') }}">Analyze Your Code</a></header>
+
+<section class="hero wrap">
+  <div>
+    <h1>Know what your code costs. Then make it cost less.</h1>
+    <p class="lead">EcoCode estimates the time complexity, runtime, energy use and CO₂e of your Python code, then proposes a leaner version you can compare line by line.</p>
+    <div class="row"><a class="btn btn-primary btn-lg" href="{{ url_for('analyze') }}">Analyze Your Code</a><a class="btn btn-ghost btn-lg" href="{{ url_for('dashboard') }}">Open sample dashboard</a></div>
+    <p class="muted small">Prototype: every figure shown is demonstration data.</p>
+  </div>
+  <figure class="hero-art">
+    <svg viewBox="0 0 520 330" role="img" aria-label="Illustration: energy per run grows faster for O(n squared) than for O(n log n)">
+      <g stroke="#1f2d4a"><path d="M40 290H500M40 290V20"/><path d="M40 230H500M40 170H500M40 110H500M40 50H500" stroke-dasharray="2 6"/></g>
+      <path d="M40 285 C220 270 380 200 490 30 L490 160 C380 205 220 262 40 285Z" fill="#3ddc97" fill-opacity=".14"/>
+      <path d="M40 285 C220 270 380 200 490 30" fill="none" stroke="#ff6b6b" stroke-width="3"/>
+      <path d="M40 285 C220 262 380 205 490 160" fill="none" stroke="#3ddc97" stroke-width="3"/>
+      <text x="360" y="26" fill="#ff6b6b" font-size="14">Original O(n²)</text>
+      <text x="330" y="190" fill="#3ddc97" font-size="14">Optimized O(n log n)</text>
+      <text x="300" y="150" fill="#8fa0bf" font-size="12" transform="rotate(-30 300 150)">energy saved</text>
+      <text x="40" y="314" fill="#8fa0bf" font-size="12">Input size N</text><text x="6" y="14" fill="#8fa0bf" font-size="12">Energy per run</text>
+    </svg><figcaption>Illustration, not measured data.</figcaption>
+  </figure>
+</section>
+
+<section id="how" class="wrap sec"><h2>From pasted code to a greener version in four steps</h2>
+  <ol class="steps">
+    <li><b>Submit</b><span>Paste, write or upload Python and choose the input size N.</span></li>
+    <li><b>Analyze</b><span>Get complexity, runtime, energy and CO₂e estimates.</span></li>
+    <li><b>Optimize</b><span>Review the bottlenecks and a suggested rewrite.</span></li>
+    <li><b>Compare</b><span>See original and optimized results side by side.</span></li>
+  </ol></section>
+
+<section id="features" class="wrap sec"><h2>What you get</h2>
+  <div class="feat">
+    <div><svg class="i"><use href="#i-clock"/></svg><h3>Performance analysis</h3><p>Time complexity and runtime across growing input sizes, with the loops that cause them.</p></div>
+    <div><svg class="i"><use href="#i-bolt"/></svg><h3>Energy monitoring</h3><p>Watt-hours per run, so efficiency is a number you can track and budget.</p></div>
+    <div><svg class="i"><use href="#i-leaf"/></svg><h3>Carbon footprint</h3><p>Energy converted to grams of CO₂e, scaled to how often your code runs.</p></div>
+    <div><svg class="i"><use href="#i-code"/></svg><h3>Code optimization</h3><p>A rewritten version with changed lines highlighted and the savings quantified.</p></div>
+  </div></section>
+
+<footer class="foot wrap"><span><b>EcoCode</b> · Built by developers, for developers.</span><span class="muted">Frontend prototype. Backend not connected.</span></footer>
+{% endblock %}

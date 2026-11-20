@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}EcoCode{% endblock %} | EcoCode</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% block head %}{% endblock %}
+</head>
+<body class="{% block bodyclass %}{% endblock %}">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 4 13c0-6 7-9 16-9 0 9-3 16-9 16z"/><path d="M4 21c3-6 6-9 10-11"/></symbol>
+<symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8M5 10v10h14V10"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5M12 7v5l3 2"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></symbol>
+<symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v12M7 11l5 5 5-5M4 20h16"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+<symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/></symbol>
+</defs></svg>
+
+{% block shell %}
+<div class="app" id="app">
+  <aside class="side" id="side">
+    <a class="brand" href="{{ url_for('index') }}"><svg class="i"><use href="#i-leaf"/></svg><span class="lbl">EcoCode</span></a>
+    <nav>
+      <a href="{{ url_for('dashboard') }}"><svg class="i"><use href="#i-home"/></svg><span class="lbl">Overview</span></a>
+      <a href="{{ url_for('analyze') }}"><svg class="i"><use href="#i-plus"/></svg><span class="lbl">New analysis</span></a>
+      <a href="{{ url_for('reports') }}"><svg class="i"><use href="#i-history"/></svg><span class="lbl">Analysis history</span></a>
+      <a href="{{ url_for('reports') }}#summary"><svg class="i"><use href="#i-doc"/></svg><span class="lbl">Reports</span></a>
+      <a href="#" data-open-settings><svg class="i"><use href="#i-gear"/></svg><span class="lbl">Settings</span></a>
+    </nav>
+    <div class="profile"><span class="avatar">DU</span><span class="lbl"><b>Demo user</b><small>Placeholder profile</small></span></div>
+  </aside>
+  <div class="main">
+    <header class="top">
+      <button class="icon-btn" id="sideToggle" aria-label="Toggle sidebar"><svg class="i"><use href="#i-menu"/></svg></button>
+      <h1 class="page-title">{% block pagetitle %}{% endblock %}</h1>
+      <span class="pill demo" title="All values are mock data. A Flask backend will replace them.">Demo data</span>
+    </header>
+    <main class="content">{% block content %}{% endblock %}</main>
+  </div>
+</div>
+{% endblock %}
+
+<dialog id="settings"><form method="dialog">
+  <h2>Settings</h2>
+  <label>Editor theme<select id="setTheme"><option value="dark">Dark</option><option value="light">Light</option></select></label>
+  <p class="muted">Account, API keys and grid-region settings arrive with the backend.</p>
+  <div class="row end"><button class="btn btn-primary" value="ok">Save</button></div>
+</form></dialog>
+<div id="toasts" aria-live="polite"></div>
+
+<script src="{{ url_for('static', filename='js/api.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body></html>
